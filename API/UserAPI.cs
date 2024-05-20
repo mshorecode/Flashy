@@ -39,6 +39,18 @@ namespace Flashy.API
                     return Results.Created($"/user/{user.Id}", user);
                 }
             });
+
+            app.MapGet("/user/{id}", async (FlashyDbContext db, int id) =>
+            {
+                var user = await db.Users.SingleOrDefaultAsync(u => u.Id == id);
+                return user;
+            });
+
+            app.MapGet("/users", async (FlashyDbContext db) =>
+            {
+                var users = await db.Users.ToListAsync();
+                return Results.Ok(users);
+            });
         }
     }
 }
