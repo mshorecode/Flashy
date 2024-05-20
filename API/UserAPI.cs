@@ -40,7 +40,7 @@ namespace Flashy.API
                 }
             });
 
-            app.MapGet("/user/{id}", async (FlashyDbContext db, int id) =>
+            app.MapGet("/users/{id}", async (FlashyDbContext db, int id) =>
             {
                 var user = await db.Users.SingleOrDefaultAsync(u => u.Id == id);
                 return user;
