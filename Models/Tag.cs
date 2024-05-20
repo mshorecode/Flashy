@@ -7,6 +7,6 @@ namespace Flashy.Models
         public int Id { get; set; }
         [Required]
         public string Label { get; set; }
-        public ICollection<FlashCard> FlashCards { get; set; }
+        public ICollection<Flashcard> Flashcards { get; set; }
     }
 }

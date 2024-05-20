@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace Flashy.API
 {
-    public class UserAPI
-    { 
+    public class FlashcardAPI
+    {
         public static void Map(WebApplication app)
         {
         }

@@ -2,7 +2,7 @@
 
 namespace Flashy.Models
 {
-    public class FlashCard
+    public class Flashcard
     {
         public int Id { get; set; }
         public int SetId { get; set; }

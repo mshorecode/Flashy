@@ -5,10 +5,11 @@ using System.Linq;
 
 namespace Flashy.API
 {
-    public class UserAPI
-    { 
+    public class TagAPI
+    {
         public static void Map(WebApplication app)
         {
+
         }
     }
 }
