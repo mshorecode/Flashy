@@ -11,6 +11,7 @@ namespace Flashy.Models
         [Required]
         public string? Description { get; set; }
         public bool Favorite { get; set; }
-        public DateTime dateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public ICollection<Flashcard> Flashcards { get; set; } = new List<Flashcard>();
     }
 }
