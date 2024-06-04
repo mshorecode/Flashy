@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Flashy.Migrations
 {
     [DbContext(typeof(FlashyDbContext))]
-    partial class FlashyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240522013954_FixModels")]
+    partial class FixModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace Flashy.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("SetId")
+                    b.Property<int>("SetId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
@@ -172,11 +175,11 @@ namespace Flashy.Migrations
 
             modelBuilder.Entity("Flashy.Models.Flashcard", b =>
                 {
-                    b.HasOne("Flashy.Models.Set", "Set")
+                    b.HasOne("Flashy.Models.Set", null)
                         .WithMany("Flashcards")
-                        .HasForeignKey("SetId");
-
-                    b.Navigation("Set");
+                        .HasForeignKey("SetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Flashy.Models.Set", b =>

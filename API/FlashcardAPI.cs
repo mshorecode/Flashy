@@ -26,13 +26,15 @@ namespace Flashy.API
             app.MapPut("/flashcards/{id}", async (FlashyDbContext db, int id, UpdateFlashcardDto updatedFlashcard) =>
             {
                 var flashcard = await db.Flashcards.FindAsync(id);
+
                 if (flashcard == null)
                 {
                     return Results.NotFound();
                 }
 
-                flashcard.Question = updatedFlashcard.Question;
-                flashcard.Answer = updatedFlashcard.Answer;
+                // only updates information that is changed
+                if(!string.IsNullOrEmpty(updatedFlashcard.Question)) flashcard.Question = updatedFlashcard.Question;
+                if(!string.IsNullOrEmpty(updatedFlashcard.Answer)) flashcard.Answer = updatedFlashcard.Answer;
 
                 await db.SaveChangesAsync();
                 return Results.Ok(flashcard);

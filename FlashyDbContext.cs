@@ -19,7 +19,7 @@ public class FlashyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Flashcard>().HasData(FlashcardData.Flashcards);
+        modelBuilder.Entity<Flashcard>().HasOne(f => f.Set).WithMany(s => s.Flashcards).HasForeignKey(f => f.SetId);
         modelBuilder.Entity<Set>().HasData(SetData.Sets);
         modelBuilder.Entity<Tag>().HasData(TagData.Tags);
         modelBuilder.Entity<User>().HasData(UserData.Users);
