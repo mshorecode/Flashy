@@ -29,7 +29,7 @@ namespace Flashy.API
 
                 if (flashcard == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("Flashcard not found");
                 }
 
                 // only updates information that is changed
@@ -50,7 +50,7 @@ namespace Flashy.API
 
                 db.Flashcards.Remove(flashcard);
                 await db.SaveChangesAsync();
-                return Results.NoContent();
+                return Results.Ok($"Flashcard ID {id} deleted");
             });
         }
     }
