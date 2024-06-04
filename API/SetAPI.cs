@@ -28,12 +28,12 @@ namespace Flashy.API
                 var flashcardSet = await db.Sets.FindAsync(id);
                 if (flashcardSet == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("Set not found");
                 }
 
                 db.Sets.Remove(flashcardSet);
                 await db.SaveChangesAsync();
-                return Results.NoContent();
+                return Results.Ok($"Set ID {id} deleted");
             });
 
             // get set information by id
@@ -45,7 +45,7 @@ namespace Flashy.API
 
                 if (set == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("Set not found");
                 }
 
                 var response = new

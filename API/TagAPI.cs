@@ -28,7 +28,7 @@ namespace Flashy.API
                 var tag = await db.Tags.FindAsync(id);
                 if (tag == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("Tag not found");
                 }
 
                 tag.Label = updatedTag.Label;
@@ -42,12 +42,12 @@ namespace Flashy.API
                 var tag = await db.Tags.FindAsync(id);
                 if (tag == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("Tag not found");
                 }
 
                 db.Tags.Remove(tag);
                 await db.SaveChangesAsync();
-                return Results.NoContent();
+                return Results.Ok($"Tag ID {id} deleted");
             });
         }
     }

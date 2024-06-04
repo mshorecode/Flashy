@@ -16,11 +16,11 @@ namespace Flashy.API
 
                 if (userUid == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("User not in the database");
                 }
                 else
                 {
-                    return Results.Ok();
+                    return Results.Ok("User found in the database");
                 }
             });
 
