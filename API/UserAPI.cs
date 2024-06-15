@@ -20,7 +20,11 @@ namespace Flashy.API
                 }
                 else
                 {
+<<<<<<< Updated upstream
                     return Results.Ok();
+=======
+                    return Results.Ok(userUid);
+>>>>>>> Stashed changes
                 }
             });
 
