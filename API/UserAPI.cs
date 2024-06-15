@@ -20,7 +20,7 @@ namespace Flashy.API
                 }
                 else
                 {
-                    return Results.Ok("User found in the database");
+                    return Results.Ok(userUid);
                 }
             });
 
