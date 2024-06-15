@@ -16,15 +16,11 @@ namespace Flashy.API
 
                 if (userUid == null)
                 {
-                    return Results.NotFound();
+                    return Results.NotFound("User not in the database");
                 }
                 else
                 {
-<<<<<<< Updated upstream
-                    return Results.Ok();
-=======
                     return Results.Ok(userUid);
->>>>>>> Stashed changes
                 }
             });
 
