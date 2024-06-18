@@ -53,6 +53,13 @@ namespace Flashy.API
                 return Results.Ok($"Flashcard ID {id} deleted");
             });
 
+            app.MapGet("/flashcards/user/{userId}", (FlashyDbContext db, int userId) =>
+            {
+                var userFlashcards = db.Flashcards.Where(f => f.UserId == userId);
+
+                return Results.Ok(userFlashcards);
+            });
+
             app.MapGet("/flashcards/{id}", async (FlashyDbContext db, int id) =>
             {
                 var flashcard = await db.Flashcards
@@ -61,7 +68,7 @@ namespace Flashy.API
 
                 if (flashcard == null)
                 {
-                    return Results.NotFound("Set not found");
+                    return Results.NotFound("Flashcard not found");
                 }
 
                 var response = new
