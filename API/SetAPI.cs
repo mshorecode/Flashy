@@ -23,6 +23,13 @@ namespace Flashy.API
                 return Results.Ok(sets);
             });
 
+            app.MapGet("/sets/user/{userId}", (FlashyDbContext db, int userId) =>
+            {
+                var userSets = db.Sets.Where(f => f.UserId == userId).ToList();
+
+                return Results.Ok(userSets);
+            });
+
             app.MapDelete("/sets/{id}", async (FlashyDbContext db, int id) =>
             {
                 var flashcardSet = await db.Sets.FindAsync(id);
@@ -117,6 +124,25 @@ namespace Flashy.API
 
                 await db.SaveChangesAsync();
                 return Results.Ok(cardToRemove);
+            });
+
+            // edit set
+            app.MapPut("/sets/{id}", async (FlashyDbContext db, int id, UpdateSetDto updatedSet) =>
+            {
+                var set = await db.Sets.FindAsync(id);
+
+                if (set == null)
+                {
+                    return Results.NotFound("Set not found");
+                }
+
+                // only updates information that is changed
+                if (!string.IsNullOrEmpty(updatedSet.Title)) set.Title = updatedSet.Title;
+                if (!string.IsNullOrEmpty(updatedSet.Description)) set.Description = updatedSet.Description;
+                if (updatedSet.Favorite.HasValue) set.Favorite = updatedSet.Favorite.Value;
+
+                await db.SaveChangesAsync();
+                return Results.Ok(set);
             });
         }
     }
