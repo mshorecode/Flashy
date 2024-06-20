@@ -49,6 +49,12 @@ namespace Flashy.API
                 await db.SaveChangesAsync();
                 return Results.Ok($"Tag ID {id} deleted");
             });
+
+            app.MapGet("/tags/{id}", async (FlashyDbContext db, int id) =>
+            {
+                var tag = await db.Tags.SingleOrDefaultAsync(t => t.Id == id);
+                return tag;
+            });
         }
     }
 }
