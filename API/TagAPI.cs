@@ -55,6 +55,13 @@ namespace Flashy.API
                 var tag = await db.Tags.SingleOrDefaultAsync(t => t.Id == id);
                 return tag;
             });
+
+            app.MapGet("/tags/user/{userId}", (FlashyDbContext db, int userId) =>
+            {
+                var userTags = db.Tags.Where(f => f.UserId == userId);
+
+                return Results.Ok(userTags);
+            });
         }
     }
 }
